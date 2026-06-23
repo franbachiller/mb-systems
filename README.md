@@ -31,6 +31,16 @@ If `ADMIN_PIN` is not set, local development uses `1234`.
 `NEXT_PUBLIC_BUSINESS_WHATSAPP` is used by the public booking lookup contact
 button.
 
+## Visual MVP
+
+The static client-facing showcase is published at:
+
+https://narfbach.github.io/mb-systems/
+
+It is intentionally visual-only: catalog filters, packages, and the local cart
+work in the browser, while booking, admin, database, and payment operations are
+disabled.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
