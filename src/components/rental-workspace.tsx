@@ -100,6 +100,20 @@ const curatedPackages: CuratedPackage[] = [
 const isShowcase = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
+function publicAssetUrl(path: string) {
+  if (/^(?:https?:|data:|blob:)/.test(path)) {
+    return path;
+  }
+
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+
+  if (publicBasePath && !normalizedPath.startsWith(`${publicBasePath}/`)) {
+    return `${publicBasePath}${normalizedPath}`;
+  }
+
+  return normalizedPath;
+}
+
 export default function RentalWorkspace({
   initialRentalWindow,
   initialSnapshot,
@@ -551,7 +565,9 @@ export default function RentalWorkspace({
                       >
                         <div
                           className="h-14 w-14 shrink-0 rounded-md bg-slate-100 bg-contain bg-center bg-no-repeat"
-                          style={{ backgroundImage: `url(${product.imageUrl})` }}
+                          style={{
+                            backgroundImage: `url(${publicAssetUrl(product.imageUrl)})`,
+                          }}
                         />
                         <div className="min-w-0 flex-1">
                           <p className="truncate text-sm font-semibold text-slate-900">
@@ -687,7 +703,7 @@ function ProductCard({
     <article className="product-card group overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
       <div
         className="equipment-media relative aspect-[4/3] transition duration-300 group-hover:scale-[1.015]"
-        style={{ backgroundImage: `url(${product.imageUrl})` }}
+        style={{ backgroundImage: `url(${publicAssetUrl(product.imageUrl)})` }}
       >
         <span className="absolute left-3 top-3 z-10 rounded-md border border-white/10 bg-slate-950/85 px-2 py-1 text-xs font-semibold text-white backdrop-blur">
           {product.category}

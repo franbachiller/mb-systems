@@ -39,7 +39,7 @@ https://narfbach.github.io/mb-systems/
 
 It is intentionally visual-only: catalog filters, packages, and the local cart
 work in the browser, while booking, admin, database, and payment operations are
-disabled.
+disabled. Every push to `main` republishes this showcase through GitHub Actions.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
