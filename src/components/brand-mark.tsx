@@ -1,10 +1,12 @@
 import Image from "next/image";
 
 export default function BrandMark({ compact = false }: { compact?: boolean }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
   return (
     <span className={`brand-mark ${compact ? "brand-mark--compact" : ""}`}>
       <Image
-        src="/brand/mb-logo-dark-v2.png"
+        src={`${basePath}/brand/mb-logo-dark-v2.png`}
         width={974}
         height={502}
         sizes={compact ? "144px" : "(max-width: 640px) 168px, 192px"}

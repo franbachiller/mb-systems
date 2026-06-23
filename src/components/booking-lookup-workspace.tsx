@@ -35,6 +35,8 @@ type LookupState =
 
 type PaymentReturnStatus = "none" | "approved" | "pending" | "failed";
 
+const isShowcase = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+
 const currencyFormatter = new Intl.NumberFormat("es-AR", {
   style: "currency",
   currency: "ARS",
@@ -86,6 +88,7 @@ export default function BookingLookupWorkspace({
   const [phone, setPhone] = useState("");
   const [lookupState, setLookupState] = useState<LookupState>({ status: "idle" });
   const canSubmit =
+    !isShowcase &&
     bookingId.trim().length > 0 &&
     phone.trim().length > 0 &&
     lookupState.status !== "loading";
@@ -230,7 +233,11 @@ export default function BookingLookupWorkspace({
               className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
             >
               <Search className="h-4 w-4" />
-              {lookupState.status === "loading" ? "Buscando" : "Consultar"}
+              {isShowcase
+                ? "Consulta disponible proximamente"
+                : lookupState.status === "loading"
+                  ? "Buscando"
+                  : "Consultar"}
             </button>
           </div>
         </div>

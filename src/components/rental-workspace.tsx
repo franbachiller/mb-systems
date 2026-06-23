@@ -97,6 +97,9 @@ const curatedPackages: CuratedPackage[] = [
   },
 ];
 
+const isShowcase = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function RentalWorkspace({
   initialRentalWindow,
   initialSnapshot,
@@ -157,6 +160,7 @@ export default function RentalWorkspace({
   const deposit = Math.ceil(subtotal * 0.3);
   const selectedUnits = cartItems.reduce((total, item) => total + item.quantity, 0);
   const canSubmit =
+    !isShowcase &&
     cartItems.length > 0 &&
     validWindow &&
     customer.name.trim().length > 0 &&
@@ -270,6 +274,10 @@ export default function RentalWorkspace({
   }
 
   async function refreshSnapshot(window: RentalWindow) {
+    if (isShowcase) {
+      return;
+    }
+
     const requestId = snapshotRequestId.current + 1;
     snapshotRequestId.current = requestId;
     setLoadingSnapshot(true);
@@ -363,14 +371,17 @@ export default function RentalWorkspace({
         <div className="mx-auto max-w-7xl px-4 pb-10 pt-5 sm:px-6 lg:px-8 lg:pb-14">
           <nav className="flex items-center justify-between gap-4">
             <BrandMark />
-            <a
-              href="/reservas"
-              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
-            >
-              <PackageCheck className="h-4 w-4" />
-              <span className="hidden sm:inline">Consultar mi reserva</span>
-              <span className="sm:hidden">Mi reserva</span>
-            </a>
+            <div className="flex items-center gap-2">
+              {isShowcase ? <span className="hidden rounded-md border border-red-400/30 bg-red-500/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-red-300 sm:inline-flex">Vista MVP</span> : null}
+              <a
+                href={`${publicBasePath}/reservas`}
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+              >
+                <PackageCheck className="h-4 w-4" />
+                <span className="hidden sm:inline">Consultar mi reserva</span>
+                <span className="sm:hidden">Mi reserva</span>
+              </a>
+            </div>
           </nav>
 
           <div className="mt-10 grid items-end gap-8 lg:grid-cols-[1fr_520px]">
@@ -613,7 +624,9 @@ export default function RentalWorkspace({
                     className="flex h-11 w-full items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
                   >
                     <CheckCircle2 className="h-4 w-4" />
-                    {submitState.status === "submitting"
+                    {isShowcase
+                      ? "Reservas disponibles proximamente"
+                      : submitState.status === "submitting"
                       ? "Creando reserva"
                       : "Solicitar reserva"}
                   </button>

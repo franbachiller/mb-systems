@@ -12,12 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "MB Servicios para Eventos | Reservas",
   description: "Alquiler de sonido, iluminacion y equipamiento para eventos.",
   icons: {
-    icon: "/brand/mb-icon.png",
-    apple: "/brand/mb-icon.png",
+    icon: `${publicBasePath}/brand/mb-icon.png`,
+    apple: `${publicBasePath}/brand/mb-icon.png`,
   },
 };
 

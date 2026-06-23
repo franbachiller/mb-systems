@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
+const isPagesShowcase = process.env.PAGES_SHOWCASE === "true";
+const pagesBasePath = "/mb-systems";
+
 const nextConfig: NextConfig = {
   devIndicators: false,
+  ...(isPagesShowcase
+    ? {
+        assetPrefix: pagesBasePath,
+        basePath: pagesBasePath,
+      }
+    : {}),
   async headers() {
     return [
       {
