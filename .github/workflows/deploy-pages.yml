@@ -6,16 +6,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     env:
       PAGES_SHOWCASE: "true"
@@ -63,21 +61,22 @@ jobs:
           cp pages-dist/index.html pages-dist/404.html
           touch pages-dist/.nojekyll
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - name: Publish gh-pages branch
+        shell: bash
+        run: |
+          git fetch origin gh-pages
+          git worktree add --detach /tmp/mb-systems-pages origin/gh-pages
+          find /tmp/mb-systems-pages -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a pages-dist/. /tmp/mb-systems-pages/
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: pages-dist
+          git -C /tmp/mb-systems-pages config user.name "github-actions[bot]"
+          git -C /tmp/mb-systems-pages config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C /tmp/mb-systems-pages add -A
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          if git -C /tmp/mb-systems-pages diff --cached --quiet; then
+            echo "No showcase changes to publish."
+            exit 0
+          fi
+
+          git -C /tmp/mb-systems-pages commit -m "deploy: update visual MVP"
+          git -C /tmp/mb-systems-pages push origin HEAD:gh-pages
