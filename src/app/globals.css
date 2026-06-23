@@ -73,6 +73,32 @@ textarea {
   color-scheme: dark;
 }
 
+.date-control,
+.date-control > span,
+.date-control__input {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100% !important;
+  max-width: 100% !important;
+  inline-size: 100% !important;
+  max-inline-size: 100% !important;
+}
+
+.date-control__input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.date-control__input::-webkit-date-and-time-value {
+  min-width: 0;
+  text-align: left;
+}
+
+.date-control__input::-webkit-datetime-edit {
+  min-width: 0;
+  padding: 0;
+}
+
 input::placeholder,
 textarea::placeholder {
   color: var(--text-faint) !important;

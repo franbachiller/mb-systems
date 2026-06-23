@@ -419,8 +419,8 @@ export default function RentalWorkspace({
               </button>
             </div>
 
-            <section className="date-panel rounded-md border border-slate-200 bg-white p-4 shadow-sm">
-              <div className="mb-4 flex items-center justify-between gap-3">
+            <section className="date-panel min-w-0 rounded-md border border-slate-200 bg-white p-4 shadow-sm">
+              <div className="mb-4 flex min-w-0 flex-wrap items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Disponibilidad</p>
                   <h2 className="mt-1 text-lg font-semibold text-slate-950">Cuando lo necesitas</h2>
@@ -430,7 +430,7 @@ export default function RentalWorkspace({
                   {loadingSnapshot ? "Actualizando" : validWindow ? `${rentalDays} dia${rentalDays > 1 ? "s" : ""}` : "Revisar fechas"}
                 </span>
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid min-w-0 gap-3 sm:grid-cols-2">
                 <DateControl label="Retiro" value={rentalWindow.start} onChange={(value) => updateWindow("start", value)} />
                 <DateControl label="Devolucion" value={rentalWindow.end} onChange={(value) => updateWindow("end", value)} />
               </div>
@@ -783,11 +783,11 @@ function DateControl({
   onChange: (value: string) => void;
 }) {
   return (
-    <label className="grid gap-2 text-sm font-medium text-slate-700">
+    <label className="date-control grid min-w-0 gap-2 text-sm font-medium text-slate-700">
       {label}
-      <span className="relative">
+      <span className="relative block min-w-0 max-w-full">
         <CalendarDays className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-        <input type="datetime-local" value={value} onChange={(event) => onChange(event.target.value)} className="h-11 w-full rounded-md border border-slate-300 bg-white pl-10 pr-3 text-sm text-slate-950 outline-none transition focus:border-cyan-600 focus:ring-2 focus:ring-cyan-100" />
+        <input type="datetime-local" value={value} onChange={(event) => onChange(event.target.value)} className="date-control__input block h-11 w-full min-w-0 max-w-full rounded-md border border-slate-300 bg-white pl-10 pr-3 text-base text-slate-950 outline-none transition focus:border-cyan-600 focus:ring-2 focus:ring-cyan-100 sm:text-sm" />
       </span>
     </label>
   );
