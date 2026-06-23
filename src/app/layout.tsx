@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Marcellus } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,15 +12,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const marcellus = Marcellus({
-  variable: "--font-brand",
-  subsets: ["latin"],
-  weight: "400",
-});
-
 export const metadata: Metadata = {
-  title: "MB Systems | Reservas",
-  description: "Sistema de reservas para alquiler de luces, sonido y eventos.",
+  title: "MB Servicios para Eventos | Reservas",
+  description: "Alquiler de sonido, iluminacion y equipamiento para eventos.",
+  icons: {
+    icon: "/brand/mb-icon.png",
+    apple: "/brand/mb-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -31,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} ${marcellus.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

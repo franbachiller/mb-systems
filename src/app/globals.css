@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0d0f;
-  --foreground: #f5f7f8;
-  --surface: #13171a;
-  --surface-raised: #191f23;
-  --surface-soft: #22282d;
-  --control: #0f1316;
-  --border: #303940;
-  --border-strong: #4a5660;
-  --text: #f5f7f8;
-  --text-muted: #c8d1d7;
-  --text-soft: #96a4ad;
-  --text-faint: #687780;
-  --accent: #dfe7ec;
-  --accent-strong: #ffffff;
-  --accent-soft: #20262b;
+  --background: #08080a;
+  --foreground: #f4f4f5;
+  --surface: #111113;
+  --surface-raised: #17171a;
+  --surface-soft: #202024;
+  --control: #0c0c0f;
+  --border: #29292e;
+  --border-strong: #3b3b43;
+  --text: #f4f4f5;
+  --text-muted: #c5c5cb;
+  --text-soft: #92929b;
+  --text-faint: #686872;
+  --accent: #e42427;
+  --accent-strong: #ff4d50;
+  --accent-soft: #291012;
   --success: #73d49d;
   --success-soft: #163325;
   --warning: #e7bc62;
@@ -34,12 +34,23 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 50% -16rem, rgba(228, 36, 39, 0.1), transparent 34rem),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color-scheme: dark;
+}
+
+::selection {
+  background: rgba(228, 36, 39, 0.72);
+  color: #ffffff;
+}
+
+* {
+  scrollbar-color: #3a3a40 #0c0c0f;
 }
 
 button,
@@ -72,36 +83,30 @@ select option {
 }
 
 .brand-mark {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.42rem;
-  color: #ffffff;
-  letter-spacing: 0.04em;
-  line-height: 1;
+  display: block;
+  width: 12rem;
+  line-height: 0;
 }
 
-.brand-mark__initials {
-  font-family: var(--font-brand), Constantia, Georgia, serif;
-  font-size: 2.1rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
+.brand-mark__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.38));
 }
 
-.brand-mark__word {
-  font-family: var(--font-brand), Constantia, Georgia, serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  opacity: 0.88;
-  text-transform: uppercase;
+.brand-mark--compact {
+  width: 9rem;
 }
 
-.brand-mark--compact .brand-mark__initials {
-  font-size: 1.55rem;
-}
+@media (max-width: 640px) {
+  .brand-mark {
+    width: 10.5rem;
+  }
 
-.brand-mark--compact .brand-mark__word {
-  font-size: 0.68rem;
+  .brand-mark--compact {
+    width: 8rem;
+  }
 }
 
 .text-xs {
@@ -133,13 +138,14 @@ select option {
 }
 
 .bg-slate-950 {
-  background: linear-gradient(180deg, #ffffff, #cbd6de);
-  color: #0b0d0f;
-  border-color: rgba(255, 255, 255, 0.72);
+  background: linear-gradient(180deg, #ef3033, #c91619);
+  color: #ffffff;
+  border-color: rgba(255, 77, 80, 0.58);
 }
 
 .hover\:bg-slate-800:hover {
-  background: linear-gradient(180deg, #eef4f7, #b8c5ce);
+  background: linear-gradient(180deg, #ff4447, #df1f22);
+  color: #ffffff;
 }
 
 .disabled\:bg-slate-300:disabled,
@@ -186,7 +192,7 @@ select option {
 .text-cyan-700,
 .text-cyan-800,
 .text-cyan-900 {
-  color: var(--accent-strong);
+  color: #ff6467;
 }
 
 .bg-cyan-50 {
@@ -195,18 +201,18 @@ select option {
 
 .bg-cyan-700 {
   background-color: var(--accent);
-  color: #0b0d0f;
+  color: #ffffff;
 }
 
 .hover\:bg-cyan-800:hover {
-  background-color: #ffffff;
-  color: #0b0d0f;
+  background-color: var(--accent-strong);
+  color: #ffffff;
 }
 
 .border-cyan-200,
 .border-cyan-700,
 .hover\:border-cyan-200:hover {
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 77, 80, 0.38);
 }
 
 .focus\:border-cyan-600:focus {
@@ -214,7 +220,7 @@ select option {
 }
 
 .focus\:ring-cyan-100:focus {
-  --tw-ring-color: rgba(223, 231, 236, 0.22) !important;
+  --tw-ring-color: rgba(228, 36, 39, 0.2) !important;
 }
 
 .equipment-media {
@@ -288,7 +294,33 @@ select option {
 }
 
 .shadow-sm {
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.3);
+}
+
+header.bg-white {
+  background-color: rgba(17, 17, 19, 0.9);
+  backdrop-filter: blur(16px);
+}
+
+.rounded-md {
+  border-radius: 0.45rem;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  transition-duration: 160ms;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(255, 77, 80, 0.78);
+  outline-offset: 2px;
 }
 
 .backdrop-blur {
