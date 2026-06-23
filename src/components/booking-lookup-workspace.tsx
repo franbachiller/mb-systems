@@ -144,21 +144,25 @@ export default function BookingLookupWorkspace({
   }, [initialBookingId]);
 
   return (
-    <main className="min-h-screen bg-[#f5f7fb] text-slate-950">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-5 sm:px-6 lg:px-8">
-          <Link
-            href="/"
-            className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-cyan-700 transition hover:text-cyan-900"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Volver
-          </Link>
-          <div>
+    <main className="public-shell min-h-screen text-slate-950">
+      <header className="public-hero border-b border-slate-200">
+        <div className="mx-auto flex max-w-5xl flex-col gap-7 px-4 py-6 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-between gap-4">
             <BrandMark />
-            <h1 className="mt-1 text-3xl font-semibold tracking-normal text-slate-950">
+            <Link
+              href="/"
+              className="inline-flex h-10 items-center gap-2 rounded-md border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Volver al catalogo
+            </Link>
+          </nav>
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-red-400">Seguimiento</p>
+            <h1 className="mt-3 text-4xl font-semibold tracking-[-0.03em] text-slate-950">
               Consulta de reserva
             </h1>
+            <p className="mt-3 text-base leading-7 text-slate-500">Revisa el estado, los pagos y los datos de tu solicitud con el codigo recibido.</p>
           </div>
           {paymentReturnStatus !== "none" ? (
             <PaymentReturnNotice status={paymentReturnStatus} />

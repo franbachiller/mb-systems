@@ -48,7 +48,7 @@ export default function AdminLoginForm({ nextPath }: { nextPath: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f5f7fb] px-4 py-6 text-slate-950 sm:px-6 lg:px-8">
+    <div className="public-shell min-h-screen px-4 py-6 text-slate-950 sm:px-6 lg:px-8">
       <main className="mx-auto grid min-h-[calc(100vh-48px)] max-w-md content-center">
         <Link
           href="/"
@@ -58,12 +58,14 @@ export default function AdminLoginForm({ nextPath }: { nextPath: string }) {
           Volver
         </Link>
 
-        <section className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
+        <section className="date-panel overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-200 p-5">
             <BrandMark />
-            <h1 className="mt-2 text-2xl font-semibold tracking-normal text-slate-950">
+            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-red-400">Area privada</p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-[-0.025em] text-slate-950">
               Acceso admin
             </h1>
+            <p className="mt-2 text-sm leading-6 text-slate-500">Gestion de reservas, inventario y operaciones.</p>
           </div>
 
           <div className="grid gap-4 p-5">
